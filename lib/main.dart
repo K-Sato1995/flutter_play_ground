@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 void main() {
   runApp(const TodoApp());
@@ -20,10 +21,30 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
+  final List<String> _todoList = <String>[];
+  final TextEditingController _textFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('TodoList')),
-    );
+        appBar: AppBar(title: const Text('TodoList')),
+        floatingActionButton:
+            FloatingActionButton(onPressed: () => log('print me')),
+        body: ListView(
+          children: _getItems(),
+        ));
+  }
+
+  Widget _buildTodoItem(String title) {
+    return ListTile(title: Text(title));
+  }
+
+  List<Widget> _getItems() {
+    final List<Widget> todoWidgets = <Widget>[];
+
+    for (String title in _todoList) {
+      todoWidgets.add(_buildTodoItem(title));
+    }
+    return todoWidgets;
   }
 }
