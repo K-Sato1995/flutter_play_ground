@@ -5,7 +5,7 @@ void main() {
   runApp(const TodoApp());
 }
 
-// https://daily-dev-tips.com/posts/build-a-todo-list-app-with-flutter/
+// https://medium.com/flutter-community/simple-to-do-list-app-in-flutter-26abc50db741
 class TodoApp extends StatelessWidget {
   const TodoApp({Key? key}) : super(key: key);
   @override
@@ -28,8 +28,10 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('TodoList')),
-        floatingActionButton:
-            FloatingActionButton(onPressed: () => log('print me')),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () => _showMyDialog(context),
+            tooltip: 'Add Item',
+            child: Icon(Icons.add)),
         body: ListView(
           children: _getItems(),
         ));
@@ -46,5 +48,42 @@ class _TodoListState extends State<TodoList> {
       todoWidgets.add(_buildTodoItem(title));
     }
     return todoWidgets;
+  }
+
+  void _addTodoItem(String title) {
+    setState(() {
+      _todoList.add(title);
+    });
+    _textFieldController.clear();
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add todo'),
+          content: TextField(
+            controller: _textFieldController,
+            decoration: const InputDecoration(hintText: 'Enter task here'),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('ADD'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _addTodoItem(_textFieldController.text);
+              },
+            ),
+            FlatButton(
+              child: const Text('CANCEL'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }
