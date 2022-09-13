@@ -11,7 +11,10 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // app layout
-    return MaterialApp(title: 'To-Do List', home: TodoList());
+    return MaterialApp(
+        title: 'To-Do List',
+        theme: ThemeData(primarySwatch: Colors.blueGrey),
+        home: TodoList());
   }
 }
 
@@ -27,63 +30,18 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('TodoList')),
+        appBar: AppBar(title: const Text('MyTodoList')),
         floatingActionButton: FloatingActionButton(
-            onPressed: () => _showMyDialog(context),
+            onPressed: () => {print("hello world")},
             tooltip: 'Add Item',
-            child: Icon(Icons.add)),
+            child: const Icon(Icons.add)),
         body: ListView(
-          children: _getItems(),
-        ));
-  }
-
-  Widget _buildTodoItem(String title) {
-    return ListTile(title: Text(title));
-  }
-
-  List<Widget> _getItems() {
-    final List<Widget> todoWidgets = <Widget>[];
-
-    for (String title in _todoList) {
-      todoWidgets.add(_buildTodoItem(title));
-    }
-    return todoWidgets;
-  }
-
-  void _addTodoItem(String title) {
-    setState(() {
-      _todoList.add(title);
-    });
-    _textFieldController.clear();
-  }
-
-  Future<void> _showMyDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Add todo'),
-          content: TextField(
-            controller: _textFieldController,
-            decoration: const InputDecoration(hintText: 'Enter task here'),
+          children: [const Text("hello1"), const Text("hello2")],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            children: [Icon(Icons.person)],
           ),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('ADD'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _addTodoItem(_textFieldController.text);
-              },
-            ),
-            FlatButton(
-              child: const Text('CANCEL'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
+        ));
   }
 }
