@@ -29,6 +29,7 @@ int namedParams({required int v1, required int v2}) => v1 + v2;
 void main() {
   print(one);
   print(numAsString);
+  assert(1 == one);
   print(list);
   print(set);
   print(gifts);
