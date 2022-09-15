@@ -35,8 +35,19 @@ class _TodoListState extends State<TodoList> {
             onPressed: () => {print("hello world")},
             tooltip: 'Add Item',
             child: const Icon(Icons.add)),
-        body: ListView(
-          children: [const Text("hello1"), const Text("hello2")],
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildImageColumn(),
+            _buildImageColumn(),
+            Column(children: [Text('test')]),
+            Container(
+              width: 200,
+              height: 200,
+              color: Colors.red,
+              child: Text('Test'),
+            ),
+          ],
         ),
         bottomNavigationBar: BottomAppBar(
           child: Row(
@@ -44,4 +55,15 @@ class _TodoListState extends State<TodoList> {
           ),
         ));
   }
+}
+
+Widget _buildImageColumn() {
+  return Container(
+      decoration: const BoxDecoration(
+        color: Colors.amber,
+      ),
+      margin: const EdgeInsets.all(3),
+      child: Column(
+        children: [Text('Colro'), Text('Colro')],
+      ));
 }
