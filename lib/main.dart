@@ -4,6 +4,9 @@ void main() {
   runApp(const Main());
 }
 
+// Row: Vertical Layout
+// Column: Horizontal Layout
+// Container: Separate widgets using padding, or to add borders or margins
 class Main extends StatelessWidget {
   const Main({super.key});
 
@@ -35,18 +38,10 @@ class _MyStateFulWState extends State<MyStateFulW> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Column(children: [Icon(Icons.star)]),
-      Column(children: [
-        const Text("Hello Flutter"),
-        Text("$_counter"),
-        ElevatedButton(
-            onPressed: () => setState(() => {_counter += 1}),
-            child: const Text("Increment")),
-        ElevatedButton(
-            onPressed: () => setState(() => {_counter -= 1}),
-            child: const Text("Decrement"))
-      ]),
-    ]);
+    return Center(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [Text("Hello"), Text("Hello"), Text("Hello")],
+    ));
   }
 }
