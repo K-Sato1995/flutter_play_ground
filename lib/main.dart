@@ -54,18 +54,27 @@ class _TodoState extends State<Todo> {
         ],
       ),
       SingleChildScrollView(
-          child: Column(
-              children: [...todoList.map((item) => todoItem(item)).toList()]))
+          child: Column(children: [
+        ...todoList.map((item) => todoItem(item, removeItem)).toList()
+      ]))
     ]);
+  }
+
+  removeItem(todo) {
+    setState(() => {todoList.remove(todo)});
   }
 }
 
-Widget todoItem(String item) {
+Widget todoItem(String item, removeItem) {
   return Container(
       decoration: BoxDecoration(
           // border: Border.all(color: Colors.black),
           ),
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.all(2),
-      child: Text(item));
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(item),
+        IconButton(
+            icon: Icon(Icons.delete), onPressed: () => {removeItem(item)})
+      ]));
 }
