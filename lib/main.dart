@@ -17,8 +17,7 @@ class Main extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-          appBar: AppBar(title: Text("Hello Flutter")), body: Text('test')),
+      home: Scaffold(appBar: AppBar(title: Text("My Todo App")), body: Todo()),
     );
   }
 }
@@ -31,9 +30,22 @@ class Todo extends StatefulWidget {
 }
 
 class _TodoState extends State<Todo> {
-  List<String> _todoList = ['todo'];
+  List<String> todoList = ['todo1', 'todo2'];
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        child: Row(children: [
+      todoItem('test'),
+      ...todoList.map((item) => todoItem(item)).toList()
+    ]));
   }
+}
+
+Widget todoItem(String item) {
+  return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      padding: const EdgeInsets.all(30),
+      child: Text(item));
 }
