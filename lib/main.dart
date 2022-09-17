@@ -30,22 +30,42 @@ class Todo extends StatefulWidget {
 }
 
 class _TodoState extends State<Todo> {
-  List<String> todoList = ['todo1', 'todo2'];
+  List<String> todoList = ['todo1', 'todo2', 'todo3'];
+  String todo = '';
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(children: [
-      todoItem('test'),
-      ...todoList.map((item) => todoItem(item)).toList()
-    ]));
+    return Column(children: [
+      Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(labelText: 'Todo'),
+            onChanged: (value) {
+              setState(() => {todo = value});
+            },
+          ),
+          ElevatedButton(
+              onPressed: () => {
+                    setState(() => {todoList.add(todo)})
+                  },
+              child: const Text("Add"))
+        ],
+      ),
+      SingleChildScrollView(
+          child: Column(
+              children: [...todoList.map((item) => todoItem(item)).toList()]))
+    ]);
   }
 }
 
 Widget todoItem(String item) {
   return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-      ),
-      padding: const EdgeInsets.all(30),
+          // border: Border.all(color: Colors.black),
+          ),
+      margin: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(2),
       child: Text(item));
 }
