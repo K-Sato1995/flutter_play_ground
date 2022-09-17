@@ -38,10 +38,27 @@ class _MyStateFulWState extends State<MyStateFulW> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [Text("Hello"), Text("Hello"), Text("Hello")],
+    return borderedContainer(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        borderedContainer(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [Text("Hello"), Text("Hello"), Text("Hello")])),
+        borderedContainer(child: Row(children: [Text("Hello")])),
+        borderedContainer(child: Row(children: [Text("Hello")])),
+      ],
     ));
   }
+}
+
+Widget borderedContainer({required Widget child}) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.black),
+    ),
+    padding: const EdgeInsets.all(30),
+    child: child,
+  );
 }
