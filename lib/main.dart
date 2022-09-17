@@ -18,47 +18,22 @@ class Main extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(title: Text("Hello Flutter")),
-        body: MyStateFulW(),
-      ),
+          appBar: AppBar(title: Text("Hello Flutter")), body: Text('test')),
     );
   }
 }
 
-class MyStateFulW extends StatefulWidget {
-  const MyStateFulW({super.key});
+class Todo extends StatefulWidget {
+  const Todo({super.key});
 
   @override
-  State<MyStateFulW> createState() => _MyStateFulWState();
+  State<Todo> createState() => _TodoState();
 }
 
-class _MyStateFulWState extends State<MyStateFulW> {
-  bool _isPressed = false;
-  int _counter = 0;
-
+class _TodoState extends State<Todo> {
+  List<String> _todoList = ['todo'];
   @override
   Widget build(BuildContext context) {
-    return borderedContainer(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        borderedContainer(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [Text("Hello"), Text("Hello"), Text("Hello")])),
-        borderedContainer(child: Row(children: [Text("Hello")])),
-        borderedContainer(child: Row(children: [Text("Hello")])),
-      ],
-    ));
+    return Container();
   }
-}
-
-Widget borderedContainer({required Widget child}) {
-  return Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.black),
-    ),
-    padding: const EdgeInsets.all(30),
-    child: child,
-  );
 }
