@@ -15,27 +15,30 @@ class _TodoState extends State<Todo> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Column(
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'Todo'),
-            onChanged: (value) {
-              setState(() => {todo = value});
-            },
-          ),
-          ElevatedButton(
-              onPressed: () => {
-                    setState(() => {todoList.add(todo)})
-                  },
-              child: const Text("Add"))
-        ],
-      ),
-      SingleChildScrollView(
-          child: Column(children: [
-        ...todoList.map((item) => todoItem(item, removeItem)).toList()
-      ]))
-    ]);
+    return Scaffold(
+      appBar: AppBar(title: const Text("Todo")),
+      body: Column(children: [
+        Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Todo'),
+              onChanged: (value) {
+                setState(() => {todo = value});
+              },
+            ),
+            ElevatedButton(
+                onPressed: () => {
+                      setState(() => {todoList.add(todo)})
+                    },
+                child: const Text("Add"))
+          ],
+        ),
+        SingleChildScrollView(
+            child: Column(children: [
+          ...todoList.map((item) => todoItem(item, removeItem)).toList()
+        ]))
+      ]),
+    );
   }
 
   removeItem(todo) {
