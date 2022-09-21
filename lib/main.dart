@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Todo.dart';
+import 'package:todo_app/fetch.dart' as fetchWidget;
 
 void main() {
   runApp(const Main());
@@ -14,12 +15,16 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomePage(),
-        routes: {'/todo': (_) => const Todo()});
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(),
+      routes: {
+        '/todo': (_) => const Todo(),
+        '/fetch_example': (_) => const fetchWidget.FetchExample()
+      },
+    );
   }
 }
 
@@ -31,8 +36,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: const Text("My Todo App")),
         body: Center(
-            child: ElevatedButton(
+          child: Column(children: [
+            ElevatedButton(
                 onPressed: () => {Navigator.of(context).pushNamed('/todo')},
-                child: const Text("Todo"))));
+                child: const Text("Todo")),
+            ElevatedButton(
+                onPressed: () =>
+                    {Navigator.of(context).pushNamed('/fetch_example')},
+                child: const Text("FetchExample"))
+          ]),
+        ));
   }
 }

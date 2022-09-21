@@ -19,7 +19,21 @@ class _FetchExampleState extends State<FetchExample> {
   }
 
   Widget build(BuildContext context) {
-    return Container(Text(futureAlbum.data.title));
+    return Container(
+      child: FutureBuilder<Album>(
+        future: futureAlbum,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+                appBar: AppBar(title: const Text("FechExaple")),
+                body: Text(snapshot.data!.title));
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return const CircularProgressIndicator();
+        },
+      ),
+    );
   }
 }
 
@@ -39,7 +53,7 @@ class Album {
   final int id;
   final String title;
 
-  const Album({this.userId, this.id, this.title});
+  const Album({required this.userId, required this.id, required this.title});
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
